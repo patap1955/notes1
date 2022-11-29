@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Модуль1</title>
+<!--    <link rel="stylesheet" href="/src/assets/css/fontawesome-free/css/all.css">-->
+    <script src="https://unpkg.com/vue"></script>
+
+</head>
+<body>
+<div id="app">
+    <h1>{{ title }}</h1>
+    <form @submit.prevent="onSubmit">
+        <input
+                type="text"
+                v-model="input.value"
+                :placeholder="input.placeholder"
+                required
+        >
+        <button type="submit">Создать задачу</button>
+    </form>
+    <div class="notes">
+        <div class="note" v-for="note in notes" :key="note.id">
+            <p v-if="note.edit">
+                <span @click="remove(note.id)">&#10005;</span>
+                <span @click="onEditNote(note.id)">{{ note.title }}</span>
+            </p>
+            <p v-else>
+                <input @change="editNote" :data-id="note.id" type="text" :value="note.title">
+                <button @click="saveTask(note.id)">сохранить</button>
+            </p>
+        </div>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
